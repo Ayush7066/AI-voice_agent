@@ -50,14 +50,14 @@ const formSchema = authFormSchema(type);
   function onSubmit(values: z.infer<typeof formSchema>) {
     try{
         if(type === 'sign-up'){
-            console.log(`SIGN UP`, values)
+            console.log("SIGN UP", values)
         } else {
-            console.log(`SIGN IN`, values);
+            console.log("SIGN IN", values);
         }
 
     } catch (error){
         console.log(error);
-        toast.error(`There was an error : ${error}`)
+        toast.error("There was an error : ${error}")
     }
     console.log(values)
   }
@@ -72,31 +72,30 @@ const formSchema = authFormSchema(type);
     <h3> Practice job interview with AI </h3>
         </div>
         
-        <Form control={form.control}>
-  <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6 mt-4 form">
-    {!isSignIn && (
-      <FormField
-        control={form.control}
+        <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} 
+      className=" w-full space-y-6 mt-4 form">
+        {! isSignIn && (
+          <FormField
+          control={form.control}
         name="name"
         label="Name"
         placeholder="Your Name"
-      />
-    )}
-    <p>Email</p> 
-    <p>Password</p>
-    <Button className="btn" type="submit">
-      {isSignIn ? 'Sign in' : 'Create an Account'}
-    </Button>
-  </form>
-</Form>
-
+/>
+        )}
+        <p>Email</p> 
+        <p>Password</p>
+        <Button className="btn"
+         type="submit">{isSignIn ? 'Sign in' : 'Create an Account '}</Button>
+      </form>
+    </Form>
     <p className="text-centre">
         {isSignIn ? 'No account yet?' : 'Have an account already?'}
         <Link href={!isSignIn ? "/sign-in" : "/sign-up"} className="font-bold text-user-primary ml-1">
   {!isSignIn ? "Sign in" : "Sign up"}
 </Link>    </p>
     </div>
-    </div>
+    </div> 
 
   )
 }
