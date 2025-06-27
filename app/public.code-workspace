@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "public",
+			"path": "../../../Downloads/public"
+		},
+		{
+			"name": "mock_interview_platform",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
