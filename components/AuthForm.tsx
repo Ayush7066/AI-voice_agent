@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form"
 import Image from "next/image";
 import Link from "next/link";
 import {toast} from "sonner";
+import { useRouter } from "next/navigation";
+
 
 
 import { z } from "zod"
@@ -32,6 +34,8 @@ const authFormSchema = (type:FormType) => {
     })
 }
 const AuthForm = ({ type} : { type: FormType}) => {
+const router = useRouter();
+
 const formSchema = authFormSchema(type);
     // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
@@ -50,14 +54,15 @@ const formSchema = authFormSchema(type);
   function onSubmit(values: z.infer<typeof formSchema>) {
     try{
         if(type === 'sign-up'){
-            console.log("SIGN UP", values)
+          toast.success('Account created successfully. Please sign in.');
+          router.push('/sign-in')
         } else {
-            console.log("SIGN IN", values);
-        }
+          toast.success('Sign in successfully.');
+          router.push('/')        }
 
     } catch (error){
         console.log(error);
-        toast.error("There was an error : ${error}")
+        toast.error(`There was an error : ${error}`)
     }
     console.log(values)
   }
@@ -77,14 +82,38 @@ const formSchema = authFormSchema(type);
       className=" w-full space-y-6 mt-4 form">
         {! isSignIn && (
           <FormField
-          control={form.control}
-        name="name"
-        label="Name"
-        placeholder="Your Name"
-/>
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <div>
+                <label htmlFor="name" className="block mb-1">Name</label>
+                <Input id="name" placeholder="Your Name" {...field} />
+              </div>
+            )}
+          />
         )}
-        <p>Email</p> 
-        <p>Password</p>
+       <FormField
+  control={form.control}
+  name="email"
+  render={({ field }) => (
+    <div>
+      <label htmlFor="email" className="block mb-1">Email</label>
+      <Input id="email" placeholder="Your email address" {...field} />
+    </div>
+  )}
+/>
+
+<FormField
+  control={form.control}
+  name="password"
+  render={({ field }) => (
+    <div>
+      <label htmlFor="password" className="block mb-1">Password</label>
+      <Input id="password" type="password" placeholder="Enter your password" {...field} />
+    </div>
+  )}
+/>
+
         <Button className="btn"
          type="submit">{isSignIn ? 'Sign in' : 'Create an Account '}</Button>
       </form>
