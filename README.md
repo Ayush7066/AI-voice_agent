@@ -33,22 +33,14 @@ Zod – Schema validation for secure data handling
 
 Getting Started
 1. Clone the Repository
-bash
-Copy
-Edit
 git clone https://github.com/Ayush7066/AI-voice_agent.git
 cd AI-voice_agent
+
 2. Install Dependencies
-bash
-Copy
-Edit
 npm install
+
 3. Configure Environment Variables
 Create a .env.local file in the root directory and add the following:
-
-makefile
-Copy
-Edit
 NEXT_PUBLIC_VAPI_WEB_TOKEN=
 NEXT_PUBLIC_VAPI_WORKFLOW_ID=
 
@@ -69,9 +61,9 @@ FIREBASE_PRIVATE_KEY=
 Be sure to replace the values above with actual credentials from your Firebase and Vapi setups.
 
 4. Start the Development Server
-bash
-Copy
-Edit
 npm run dev
+ 
 Open your browser at http://localhost:3000 to access the app locally.
+
+
 
